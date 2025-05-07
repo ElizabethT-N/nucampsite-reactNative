@@ -38,4 +38,4 @@ const partnersSlice = createSlice({
     }
 });
 
-export default partnersSlice.reducer;
+export const partnersReducer = partnersSlice.reducer;

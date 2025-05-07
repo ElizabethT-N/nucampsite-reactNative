@@ -38,4 +38,4 @@ const campsitesSlice = createSlice({
     }
 });
 
-export default campsitesSlice.reducer;
+export const campsitesReducer = campsitesSlice.reducer;
