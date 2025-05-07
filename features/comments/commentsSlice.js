@@ -38,4 +38,4 @@ const commentsSlice = createSlice({
     }
 });
 
-export const commentsReducer = commentsSlice.reducer;
+export default commentsSlice.reducer;

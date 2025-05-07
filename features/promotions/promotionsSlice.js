@@ -38,4 +38,4 @@ const promotionsSlice = createSlice({
     }
 });
 
-export const promotionsReducer = promotionsSlice.reducer;
+export default promotionsSlice.reducer;
