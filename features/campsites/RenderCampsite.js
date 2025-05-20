@@ -1,10 +1,11 @@
 import { useRef } from 'react';
-import { 
-    StyleSheet, 
-    Text, 
-    View, 
-    PanResponder, 
-    Alert 
+import {
+    StyleSheet,
+    Text,
+    View,
+    PanResponder,
+    Alert,
+    Share
 } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { baseUrl } from '../../shared/baseUrl';
@@ -52,25 +53,23 @@ const RenderCampsite = (props) => {
                     { cancelable: false }
                 );
             } else if (isRightSwipe(gestureState)) {
-                Alert.alert(
-                    'Comment',
-                    'Add a comment for ' + campsite.name,
-                    [
-                        {
-                            text: 'Cancel',
-                            style: 'cancel',
-                            onPress: () => console.log('Cancel Pressed')
-                        },
-                        {
-                            text: 'OK',
-                            onPress: () => props.onShowModal()
-                        }
-                    ],
-                    { cancelable: false }
-                );
+                props.onShowModal();
             }
         }
     });
+
+    const shareCampsite = (title, message, url) => {
+        Share.share(
+            {
+                title,
+                message: `${title}: ${message} ${url}`,
+                url
+            },
+            {
+                dialogTitle: 'Share ' + title
+            }
+        );
+    };
 
     if (campsite) {
         return (
@@ -108,6 +107,20 @@ const RenderCampsite = (props) => {
                             raised
                             reverse
                             onPress={props.onShowModal}
+                        />
+                        <Icon
+                            name='share'
+                            type='font-awesome'
+                            color='#5637DD'
+                            raised
+                            reverse
+                            onPress={() =>
+                                shareCampsite(
+                                    campsite.name,
+                                    campsite.description,
+                                    baseUrl + campsite.image
+                                )
+                            }
                         />
                     </View>
                 </Card>
